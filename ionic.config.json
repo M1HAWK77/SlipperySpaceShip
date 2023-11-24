@@ -1,0 +1,7 @@
+{
+  "name": "gameMovile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
