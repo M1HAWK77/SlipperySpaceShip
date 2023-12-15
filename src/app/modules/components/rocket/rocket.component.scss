@@ -1,0 +1,7 @@
+.plane{
+    position: absolute;
+    background: url(../../../../assets/assets_flappy_bird_ionic/images/plane2.gif) no-repeat;
+    /*plane apunte un poco hacia arriba*/
+    transform: rotate(-15deg);
+    left: 100px;
+}

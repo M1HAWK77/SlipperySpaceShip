@@ -10,7 +10,7 @@
 }
 
 .background {
-  background: url(../../assets/assets_flappy_bird_ionic/images/galaxybg.jpg) no-repeat;
+  background: url(../assets_flappy_bird_ionic/images/galaxybg.jpg) no-repeat;
   position: relative;
   overflow: hidden;
 }
@@ -41,17 +41,4 @@
 
 .bird-logo {
   width: 70px;
-}
-
-#best-puntuations{
-  margin-top: 70px;
-}
-
-.best-players ion-item {
-  color: #ffffff;
-  background-color: transparent;
-}
-
-ion-button{
-  margin-top: 35px;
 }

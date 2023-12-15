@@ -1,20 +1,104 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <!-- it contains the color of mi background (blue linear) -->
+  <div class="d-flex-center wrapper" (click)="jump()">
+    <!-- bakcground style (my space img) -->
+    <div class="background" [ngStyle]="{
+      'background-size':containerWidth+'px '+containerHeight+'px',
+      'width':containerWidth+'px',
+      'height':containerHeight+'px'
+    }">
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+      <!-- initial screen when the game is not ready -->
+      <div *ngIf="!gameStarted" class="d-flex-center text">
+        <section>
+          <!-- Plane logo (bird) -->
+          <img class="spaceship logo" src="../../assets/assets_flappy_bird_ionic/images/plane2.gif" alt="">
+          <br><br>
+          <!-- First game -->
+          <div *ngIf="!gameOver">
+            <div class="subtext">Kxm1</div>
+            Slippery SpaceShip
+          </div>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+          <div *ngIf="gameOver">
+            <div class="subtext">Juego Finalizado</div>
+            Puntuaje: {{score}}
+          </div>
+
+          <!-- Button to start the game -->
+          <ion-button (click)="startGame()" color="warning" mode="ios" shape="round">
+            {{!gameOver ? 'jugar':'Volver a jugar'}}
+            <ion-icon slot="end" name="play"></ion-icon>
+          </ion-button>
+
+          <!-- Turn music or off -->
+          <ion-button color="success" mode="ios" shape="round" (click)="playMusic()">
+            <ion-icon [name]="musicActive?'volume-mute-outline':'volume-high-outline'"></ion-icon>
+          </ion-button>
+
+          <div id="best-puntuations" *ngIf="!gameOver">
+
+            <div class="subtext">Mejores puntuaciones</div>
+
+            <!-- Lista -->
+            <ion-list class="best-players">
+              <ion-item>
+                <ion-avatar aria-hidden="true" slot="start">
+                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+                <ion-label>Huey 15pts</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-avatar aria-hidden="true" slot="start">
+                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+                <ion-label>Dewey 14pts</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-avatar aria-hidden="true" slot="start">
+                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+                <ion-label>Louie 13pts</ion-label>
+              </ion-item>
+              <ion-item>
+                <ion-avatar aria-hidden="true" slot="start">
+                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                </ion-avatar>
+                <ion-label>Fooie 16pts</ion-label>
+              </ion-item>
+            </ion-list>
+            <!-- Lista -->
+            
+          </div>
+          
+          
+        </section>
+        
+      </div>
+
+      <!-- Game started -->
+      <section *ngIf="gameStarted">
+
+        <div class="score">{{score}}</div>
+        <!--up obstacle  -->
+        <app-obstruction [height]="obstacleHeight" [width]="obstacleWidth" [left]="obstaclePosition" [top]="0"
+          [rotation]="180"></app-obstruction>
+
+        <!-- rocket -->
+        <app-rocket [height]="planeHeight" [width]="planeWidth" [top]="planePosition"></app-rocket>
+
+        <!-- down obstacle -->
+        <app-obstruction [height]="containerHeight -obstacleGap -obstacleHeight" [width]="obstacleWidth"
+          [left]="obstaclePosition"
+          [top]="containerHeight - (obstacleHeight+ (containerHeight - obstacleGap - obstacleHeight))"
+          [rotation]="0"></app-obstruction>
+
+      </section>
+
+    </div>
+
+
+
+
   </div>
 </ion-content>
