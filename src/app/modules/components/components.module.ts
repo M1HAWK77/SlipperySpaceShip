@@ -2,20 +2,27 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RocketComponent } from './rocket/rocket.component';
 import { ObstructionComponent } from './obstruction/obstruction.component';
+import { ModalPlayerComponent } from './modal-player/modal-player.component';
+import { IonicModule } from '@ionic/angular';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     RocketComponent,
-    ObstructionComponent
+    ObstructionComponent,
+    ModalPlayerComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule,
+    ReactiveFormsModule
   ],
   exports:[
     RocketComponent,
-    ObstructionComponent
+    ObstructionComponent,
+    ModalPlayerComponent
   ]
 })
 export class ComponentsModule { }

@@ -22,7 +22,11 @@
 
           <div *ngIf="gameOver">
             <div class="subtext">Juego Finalizado</div>
-            Puntuaje: {{score}}
+            Puntaje: {{score}}
+          </div>
+
+          <div *ngIf="gameOver" id="register-puntuation">
+            <app-modal-player [score]="score"></app-modal-player>
           </div>
 
           <!-- Button to start the game -->
@@ -36,44 +40,30 @@
             <ion-icon [name]="musicActive?'volume-mute-outline':'volume-high-outline'"></ion-icon>
           </ion-button>
 
+          <ion-button *ngIf="gameOver" (click)="resetGameOver()" expand="block" color="primary" shape="round">
+            Volver al inicio
+          </ion-button>
+
           <div id="best-puntuations" *ngIf="!gameOver">
 
             <div class="subtext">Mejores puntuaciones</div>
 
             <!-- Lista -->
             <ion-list class="best-players">
-              <ion-item>
+              <ion-item *ngFor="let pl of playersW()">
                 <ion-avatar aria-hidden="true" slot="start">
                   <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
                 </ion-avatar>
-                <ion-label>Huey 15pts</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-avatar aria-hidden="true" slot="start">
-                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </ion-avatar>
-                <ion-label>Dewey 14pts</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-avatar aria-hidden="true" slot="start">
-                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </ion-avatar>
-                <ion-label>Louie 13pts</ion-label>
-              </ion-item>
-              <ion-item>
-                <ion-avatar aria-hidden="true" slot="start">
-                  <img alt="" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                </ion-avatar>
-                <ion-label>Fooie 16pts</ion-label>
+                <ion-label>{{pl.userName}} {{pl.score}} pts</ion-label>
               </ion-item>
             </ion-list>
             <!-- Lista -->
-            
+
           </div>
-          
-          
+
+
         </section>
-        
+
       </div>
 
       <!-- Game started -->

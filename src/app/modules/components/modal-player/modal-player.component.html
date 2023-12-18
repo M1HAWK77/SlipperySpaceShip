@@ -1,0 +1,28 @@
+<ion-button id="open-modal" expand="block" color="success" shape="round">Registrar Puntaje</ion-button>
+<ion-modal #modal trigger="open-modal">
+  <ng-template>
+    <ion-content>
+      <ion-toolbar>
+        <ion-title>Registrar Puntuación</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="light" (click)="modal.dismiss()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+      <ion-list>
+        <form [formGroup]="formPlayer" (ngSubmit)="registerPlayerScore()">
+          <ion-item>
+            <ion-input  label="Puntaje:" [disabled]="true" [value]="score"></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-input formControlName="name" label="Nickname" placeholder="Coloca tu nombre"></ion-input>
+          </ion-item>
+
+          <ion-button type="submit" expand="block" shape="round" color="primary" [disabled]="formPlayer.invalid">
+            Guardar
+          </ion-button>
+        </form>
+      </ion-list>
+    </ion-content>
+  </ng-template>
+</ion-modal>

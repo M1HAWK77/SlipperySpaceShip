@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
+import { DatabaseService } from '../services/database.service';
 
 @Component({
   selector: 'app-home',
@@ -7,6 +8,9 @@ import { Platform } from '@ionic/angular';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
+
+  //get users from db
+  playersW=this.database.getUsers();
 
   //game variable-----------------------
   containerHeight!: number;
@@ -47,7 +51,8 @@ export class HomePage implements OnInit {
 
   constructor(
     //the container increase or decrease depends the platform whether web or mobile
-    private platform: Platform) { }
+    private platform: Platform, private database:DatabaseService) { 
+    }
 
 
   ngOnInit(): void {
@@ -66,7 +71,7 @@ export class HomePage implements OnInit {
   }
 
   //start game
-  startGame() {
+  async startGame() {
     this.gameStarted = true;
     this.gameOver = false;
     this.score = 0;
@@ -121,14 +126,13 @@ export class HomePage implements OnInit {
     let bottomObstacleCollision=this.planePosition >= this.containerHeight-(this.containerHeight-this.obstacleGap-this.obstacleHeight)-this.planeHeight;
 
     let floorCollision=(this.planePosition+40)>= this.containerHeight;
-    
+
     if(floorCollision) this.setGameOver();
 
     if(this.obstaclePosition >= this.obstacleWidth && this.obstaclePosition <= this.obstacleWidth+80
       && (topObstacleCollision||bottomObstacleCollision)){
         this.setGameOver();
       }
-
 
   }
 
@@ -143,6 +147,9 @@ export class HomePage implements OnInit {
       this.audio.pause();
     }
   }
-
+  
+  resetGameOver(){
+    this.gameOver = !this.gameOver;
+  }
 
 }
